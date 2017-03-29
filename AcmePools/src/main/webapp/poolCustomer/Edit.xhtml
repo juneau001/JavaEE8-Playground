@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PoolCustomerEditDlg" widgetVar="PoolCustomerEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPoolCustomerTitle}">
+            <h:form id="PoolCustomerEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{poolCustomerController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPoolCustomerLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{poolCustomerController.selected.id}" title="#{bundle.EditPoolCustomerTitle_id}" required="true" requiredMessage="#{bundle.EditPoolCustomerRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditPoolCustomerLabel_customerId}" for="customerId" />
+                        <p:selectOneMenu id="customerId" value="#{poolCustomerController.selected.customerId}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{customerController.itemsAvailableSelectOne}"
+                                           var="customerIdItem"
+                                           itemValue="#{customerIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPoolCustomerLabel_poolId}" for="poolId" />
+                        <p:selectOneMenu id="poolId" value="#{poolCustomerController.selected.poolId}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{poolController.itemsAvailableSelectOne}"
+                                           var="poolIdItem"
+                                           itemValue="#{poolIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{poolCustomerController.update}" value="#{bundle.Save}" update="display,:PoolCustomerListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PoolCustomerEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PoolCustomerEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

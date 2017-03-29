@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PoolCreateDlg" widgetVar="PoolCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePoolTitle}">
+            <h:form id="PoolCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{poolController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePoolLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{poolController.selected.id}" title="#{bundle.CreatePoolTitle_id}" required="true" requiredMessage="#{bundle.CreatePoolRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreatePoolLabel_style}" for="style" />
+                        <p:inputText id="style" value="#{poolController.selected.style}" title="#{bundle.CreatePoolTitle_style}" />
+                        <p:outputLabel value="#{bundle.CreatePoolLabel_shape}" for="shape" />
+                        <p:inputText id="shape" value="#{poolController.selected.shape}" title="#{bundle.CreatePoolTitle_shape}" />
+                        <p:outputLabel value="#{bundle.CreatePoolLabel_length}" for="length" />
+                        <p:inputText id="length" value="#{poolController.selected.length}" title="#{bundle.CreatePoolTitle_length}" />
+                        <p:outputLabel value="#{bundle.CreatePoolLabel_width}" for="width" />
+                        <p:inputText id="width" value="#{poolController.selected.width}" title="#{bundle.CreatePoolTitle_width}" />
+                        <p:outputLabel value="#{bundle.CreatePoolLabel_radius}" for="radius" />
+                        <p:inputText id="radius" value="#{poolController.selected.radius}" title="#{bundle.CreatePoolTitle_radius}" />
+                        <p:outputLabel value="#{bundle.CreatePoolLabel_gallons}" for="gallons" />
+                        <p:inputText id="gallons" value="#{poolController.selected.gallons}" title="#{bundle.CreatePoolTitle_gallons}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{poolController.create}" value="#{bundle.Save}" update="display,:PoolListForm:datalist,:growl" oncomplete="handleSubmit(args,'PoolCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PoolCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

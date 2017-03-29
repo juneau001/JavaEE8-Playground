@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+   <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPoolCustomerTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="customerExportForm">
+             <p:panel header="Choose Columns for Export">
+                    <p:pickList value="#{columnModelController.columns}"  
+                                var="column" 
+                                itemLabel="#{column.columnLabel}"  
+                                itemValue="#{column.columnName}"
+                                effect="bounce"
+                                showSourceControls="true" showTargetControls="true">
+                        <f:facet name="sourceCaption">Columns</f:facet>
+                        <f:facet name="targetCaption">Selected</f:facet>
+                    </p:pickList> 
+             </p:panel>
+                <p:dataTable id="customerTable" var="item" rendered="false"
+                         value="#{customerController.items}" widgetVar="customerTable">                    
+                    <p:columns value="#{columnModelController.dynamicColumns}" var="column" columnIndexVar="colIndex" >
+                        <f:facet name="header">
+                            <h:outputText value="#{column.header}" />
+                        </f:facet>
+                        <h:outputText value="#{item[column.property]}" />
+                    </p:columns>
+                </p:dataTable>
+                <hr/>
+               
+                <h:outputText value="Type of file to export: "/>
+                <h:commandLink>
+
+                    <p:graphicImage value="/faces/resources/images/excel.png"/>
+                    <p:dataExporter id="propertyXlsExport"  type="xls" target="customerTable" fileName="customers"
+                                    preProcessor="#{columnModelController.preProcess}"
+                                   />
+                </h:commandLink>
+                </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

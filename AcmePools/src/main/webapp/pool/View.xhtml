@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PoolViewDlg" widgetVar="PoolViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPoolTitle}">
+            <h:form id="PoolViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{poolController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPoolLabel_id}"/>
+                        <h:outputText value="#{poolController.selected.id}" title="#{bundle.ViewPoolTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewPoolLabel_style}"/>
+                        <h:outputText value="#{poolController.selected.style}" title="#{bundle.ViewPoolTitle_style}"/>
+                        <h:outputText value="#{bundle.ViewPoolLabel_shape}"/>
+                        <h:outputText value="#{poolController.selected.shape}" title="#{bundle.ViewPoolTitle_shape}"/>
+                        <h:outputText value="#{bundle.ViewPoolLabel_length}"/>
+                        <h:outputText value="#{poolController.selected.length}" title="#{bundle.ViewPoolTitle_length}"/>
+                        <h:outputText value="#{bundle.ViewPoolLabel_width}"/>
+                        <h:outputText value="#{poolController.selected.width}" title="#{bundle.ViewPoolTitle_width}"/>
+                        <h:outputText value="#{bundle.ViewPoolLabel_radius}"/>
+                        <h:outputText value="#{poolController.selected.radius}" title="#{bundle.ViewPoolTitle_radius}"/>
+                        <h:outputText value="#{bundle.ViewPoolLabel_gallons}"/>
+                        <h:outputText value="#{poolController.selected.gallons}" title="#{bundle.ViewPoolTitle_gallons}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PoolViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CustomerEditDlg" widgetVar="CustomerEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCustomerTitle}">
+            <h:form id="CustomerEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{customerController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCustomerLabel_customerId}" for="customerId" />
+                        <p:inputText id="customerId" value="#{customerController.selected.customerId}" title="#{bundle.EditCustomerTitle_customerId}" required="true" requiredMessage="#{bundle.EditCustomerRequiredMessage_customerId}"/>
+                        <p:outputLabel value="#{bundle.EditCustomerLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{customerController.selected.name}" title="#{bundle.EditCustomerTitle_name}" />
+                        <p:outputLabel value="#{bundle.EditCustomerLabel_addressline1}" for="addressline1" />
+                        <p:inputText id="addressline1" value="#{customerController.selected.addressline1}" title="#{bundle.EditCustomerTitle_addressline1}" />
+                        <p:outputLabel value="#{bundle.EditCustomerLabel_addressline2}" for="addressline2" />
+                        <p:inputText id="addressline2" value="#{customerController.selected.addressline2}" title="#{bundle.EditCustomerTitle_addressline2}" />
+                        <p:outputLabel value="#{bundle.EditCustomerLabel_city}" for="city" />
+                        <p:inputText id="city" value="#{customerController.selected.city}" title="#{bundle.EditCustomerTitle_city}" />
+                        <p:outputLabel value="#{bundle.EditCustomerLabel_state}" for="state" />
+                        <p:inputText id="state" value="#{customerController.selected.state}" title="#{bundle.EditCustomerTitle_state}" />
+                        <p:outputLabel value="#{bundle.EditCustomerLabel_phone}" for="phone" />
+                        <p:inputText id="phone" value="#{customerController.selected.phone}" title="#{bundle.EditCustomerTitle_phone}" />
+                        <p:outputLabel value="#{bundle.EditCustomerLabel_fax}" for="fax" />
+                        <p:inputText id="fax" value="#{customerController.selected.fax}" title="#{bundle.EditCustomerTitle_fax}" />
+                        <p:outputLabel value="#{bundle.EditCustomerLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{customerController.selected.email}" title="#{bundle.EditCustomerTitle_email}" />
+                        <p:outputLabel value="#{bundle.EditCustomerLabel_creditLimit}" for="creditLimit" />
+                        <p:inputText id="creditLimit" value="#{customerController.selected.creditLimit}" title="#{bundle.EditCustomerTitle_creditLimit}" />
+                        <p:outputLabel value="#{bundle.EditCustomerLabel_discountCode}" for="discountCode" />
+                        <p:selectOneMenu id="discountCode" value="#{customerController.selected.discountCode}" required="true" requiredMessage="#{bundle.EditCustomerRequiredMessage_discountCode}">
+                            <f:selectItems value="#{discountCodeController.itemsAvailableSelectOne}"
+                                           var="discountCodeItem"
+                                           itemValue="#{discountCodeItem}"
+                                           itemLabel="#{discountCodeItem.discountCode}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCustomerLabel_zip}" for="zip" />
+                        <p:selectOneMenu id="zip" value="#{customerController.selected.zip}" required="true" requiredMessage="#{bundle.EditCustomerRequiredMessage_zip}">
+                            <f:selectItems value="#{microMarketController.itemsAvailableSelectOne}"
+                                           var="zipItem"
+                                           itemValue="#{zipItem}"
+                                           itemLabel="#{zipItem.zipCode}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{customerController.update}" value="#{bundle.Save}" update="display,:CustomerListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CustomerEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CustomerEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
