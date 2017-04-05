@@ -13,7 +13,7 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.primefaces</groupId>
@@ -33,7 +33,7 @@
             <version>2.3.2-b02</version>
             <scope>provided</scope>
         </dependency>
-       
+
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
@@ -50,9 +50,9 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.12</version>
+            <version>1.16.16</version>
         </dependency>
-       
+
         <!-- JMS 2.0 -->
         <dependency>
             <groupId>javax.jms</groupId>
@@ -183,7 +183,7 @@
             <artifactId>javax.json.bind-api</artifactId>
             <version>1.0.0-M1</version>
         </dependency>
-                    
+
         <dependency>
             <groupId>org.eclipse</groupId>
             <artifactId>yasson</artifactId>
@@ -216,21 +216,21 @@
             <version>2.1-m05</version>
             <scope>provided</scope>
         </dependency>
-       
+
         <!-- JSF 2.3 -->
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>javax.faces</artifactId>
             <version>2.3.0</version>
-           
+
         </dependency>
         <!-- SECURITY -->
         <!-- Needed until Java EE 8-->
-        <dependency>        
+        <dependency>
             <groupId>javax.security</groupId>
             <artifactId>javax.security-api</artifactId>
             <version>1.0-m01</version>
-        </dependency>        
+        </dependency>
         <dependency>
             <groupId>org.glassfish.soteria</groupId>
             <artifactId>soteria</artifactId>
@@ -292,9 +292,16 @@
             <id>java.net-Public</id>
             <name>Maven Java Net Snapshots and Releases</name>
             <url>https://maven.java.net/content/groups/public/</url>
-       
+
         </repository>
-        
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-javaee-security-maven</id>
+            <name>bintray</name>
+            <url>https://dl.bintray.com/javaee-security-spec/maven</url>
+        </repository>
 
         <!-- Needed for Yasson -->
         <repository>
