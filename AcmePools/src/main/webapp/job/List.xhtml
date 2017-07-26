@@ -63,7 +63,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListJobTitle_customerId}"/>
                             </f:facet>
-                            <h:outputText value="#{item.customerId}"/>
+                            <h:outputText value="#{customerController.findById(item.customerId.id).name}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{jobController.prepareCreate}" update=":JobCreateForm" oncomplete="PF('JobCreateDialog').show()"/>

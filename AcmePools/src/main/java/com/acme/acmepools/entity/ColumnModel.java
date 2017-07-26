@@ -11,9 +11,12 @@ import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -36,6 +39,10 @@ import lombok.Data;
 public class ColumnModel implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    // Uncomment if using Apache Derby 10.6+
+//    @GeneratedValue(strategy=GenerationType.SEQUENCE,
+//    generator="column_model_s_generator")
+//    @SequenceGenerator(name="column_model_s_generator",sequenceName="column_model_s", allocationSize=1)
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")

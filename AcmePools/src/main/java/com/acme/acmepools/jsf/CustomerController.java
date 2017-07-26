@@ -11,14 +11,14 @@ import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.annotation.RequestParameterMap;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.inject.Inject;
 import javax.inject.Named;
+import javax.json.bind.Jsonb;
+import javax.json.bind.JsonbBuilder;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.component.datatable.DataTable;
@@ -31,7 +31,7 @@ public class CustomerController implements Serializable {
 
     @EJB
     private com.acme.acmepools.session.CustomerFacade ejbFacade;
-    private List<Customer> items = null;
+    private List<Customer> customers = null;
     @Getter @Setter
     private Customer selected;
 
@@ -57,7 +57,7 @@ public class CustomerController implements Serializable {
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("CustomerCreated"));
         if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
+            customers = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
@@ -69,15 +69,15 @@ public class CustomerController implements Serializable {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("CustomerDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
-            items = null;    // Invalidate list of items to trigger re-query.
+            customers = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public List<Customer> getItems() {
-        if (items == null) {
-            items = getFacade().findAll();
+        if (customers == null) {
+            customers = getFacade().findAll();
         }
-        return items;
+        return customers;
     }
 
     private void persist(PersistAction persistAction, String successMessage) {
@@ -181,5 +181,24 @@ public class CustomerController implements Serializable {
         return "customerInfo";
     }
     
+    /**
+     * Utilizes the JSON-B API to create a JSON representation from a collection
+     * of data and serializes.
+     * 
+     * @return 
+     */
+    public String fetchJson(){
+        System.out.println("Items: " + customers);
+        Jsonb jsonb = JsonbBuilder.create();
+        String result = null;
+        
+        result = jsonb.toJson(customers);
+       
+       
+        return result;
+    }
     
+    public Customer findById(Integer customerId){
+        return ejbFacade.findByCustomerId(customerId);
+    }
 }

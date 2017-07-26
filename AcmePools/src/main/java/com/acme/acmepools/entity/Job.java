@@ -7,6 +7,7 @@
 package com.acme.acmepools.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -38,10 +39,14 @@ import lombok.Data;
 public class Job implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    // Uncomment if using Apache Derby 10.6+
+//    @GeneratedValue(strategy=GenerationType.SEQUENCE,
+//    generator="job_s_generator")
+//    @SequenceGenerator(name="job_s_generator",sequenceName="job_s", allocationSize=1)
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")
-    private Integer id;
+    private BigDecimal id;
     @Lob
     @Column(name = "DESCRIPTION")
     private String description;
@@ -49,7 +54,8 @@ public class Job implements Serializable {
     @Column(name = "EST_HOURS")
     private Double estHours;
     @Column(name = "COST")
-    private Integer cost;
+    private BigDecimal cost;
+   // @Future
     @Column(name = "WORK_DATE")
     private LocalDate workDate;
     @JoinColumn(name = "CUSTOMER_ID", referencedColumnName = "ID")
@@ -59,7 +65,7 @@ public class Job implements Serializable {
     public Job() {
     }
 
-    public Job(Integer id) {
+    public Job(BigDecimal id) {
         this.id = id;
     }
  

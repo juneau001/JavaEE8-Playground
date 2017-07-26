@@ -29,4 +29,16 @@ public class CustomerFacade extends AbstractFacade<Customer> {
         super(Customer.class);
     }
     
+    /**
+     * Returns a <code>Customer</code> object for a given <code>customerId</code>
+     * @param customerId
+     * @return 
+     */
+    public Customer findByCustomerId(Integer customerId){
+        return (Customer) em.createQuery("select object(o) from Customer o " +
+                "where o.customerId = :customerId")
+                .setParameter("customerId", customerId)
+                .getSingleResult();
+    }
+    
 }

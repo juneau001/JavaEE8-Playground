@@ -13,27 +13,22 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>6.0</version>
-        </dependency>
+        <!-- Servlet 4.0 -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.0-b05</version>
+            <version>4.0.0-b07</version>
             <scope>provided</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
+        <!-- JSP 2.3
+             https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>javax.servlet.jsp-api</artifactId>
             <version>2.3.2-b02</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
@@ -46,25 +41,28 @@
             <version>2.5.2</version>
             <scope>provided</scope>
         </dependency>
-        <!-- Lombok -->
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.16</version>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.1-m09</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>6.0</version>
+        </dependency>
         <!-- JMS 2.0 -->
         <dependency>
             <groupId>javax.jms</groupId>
             <artifactId>javax.jms-api</artifactId>
-            <version>2.0</version>
+            <version>2.0.1</version>
             <scope>provided</scope>
         </dependency>
         <!-- JavaMail -->
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
-            <version>1.6.0-rc1</version>
+            <version>1.6.0-rc2</version>
             <scope>provided</scope>
         </dependency>
         <!-- Resource -->
@@ -81,27 +79,8 @@
             <version>1.0-MR1</version>
             <scope>provided</scope>
         </dependency>
-        <!-- SOAP -->
-        <dependency>
-            <groupId>javax.xml.soap</groupId>
-            <artifactId>javax.xml.soap-api</artifactId>
-            <version>1.4.0-b01</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- JAX-WS -->
-        <dependency>
-            <groupId>javax.xml.ws</groupId>
-            <artifactId>jaxws-api</artifactId>
-            <version>2.2.11</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- XML Bind -->
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api-osgi</artifactId>
-            <version>2.2.7</version>
-            <scope>provided</scope>
-        </dependency>
+
+        
         <dependency>
             <groupId>javax.management.j2ee</groupId>
             <artifactId>javax.management.j2ee-api</artifactId>
@@ -150,82 +129,81 @@
             <version>1.1.1</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>javax.ejb</groupId>
             <artifactId>javax.ejb-api</artifactId>
             <version>3.2</version>
             <scope>provided</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.websocket/javax.websocket-api -->
+        <!-- Bean Validation 1.1.0 -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.0.CR3</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- WebSocket -->
         <dependency>
             <groupId>javax.websocket</groupId>
             <artifactId>javax.websocket-api</artifactId>
             <version>1.1</version>
             <scope>provided</scope>
         </dependency>
-        <!-- Bean Validation 2.0 -->
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.0.Alpha2</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- JSON-P 1.1 -->
-        <dependency>
-            <groupId>javax.json</groupId>
-            <artifactId>javax.json-api</artifactId>
-            <version>1.1.0-M2</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- JSON-B -->
-        <dependency>
-            <groupId>javax.json.bind</groupId>
-            <artifactId>javax.json.bind-api</artifactId>
-            <version>1.0.0-M2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse</groupId>
-            <artifactId>yasson</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.json</artifactId>
-            <version>1.1.0-M2</version>
-        </dependency>
-        <!-- CDI 2.0 (Weld 3.0.0 -->
-        <!-- https://mvnrepository.com/artifact/org.jboss.weld.se/weld-se-core -->
-        <dependency>
-            <groupId>org.jboss.weld</groupId>
-            <artifactId>weld-core-bom</artifactId>
-            <version>3.0.0.CR2</version>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <version>2.0-PFD2</version>
-        </dependency>
-        <!-- JAX-RS 2.1 Jersey SSE-->
-        <!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.1-m07</version>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- JSF 2.3 -->
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>javax.faces</artifactId>
             <version>2.3.0</version>
-
+            <scope>provided</scope>
         </dependency>
-        <!-- SECURITY -->
-        <!-- Needed until Java EE 8-->
+        <!-- CDI 2.0 -->
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.jboss.weld/weld-core-bom -->
+        <!-- JSON-P 1.1 -->
+        <dependency>
+            <groupId>javax.json</groupId>
+            <artifactId>javax.json-api</artifactId>
+            <version>1.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.json</artifactId>
+            <version>1.1</version>
+        </dependency>
+       
+        <!-- JSON-B -->
+        <dependency>
+            <groupId>javax.json.bind</groupId>
+            <artifactId>javax.json.bind-api</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>yasson</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JAX-RS 2.1 Jersey SSE-->
+        <!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.1-m09</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- SECURITY 1.0 -->
         <dependency>
             <groupId>javax.security</groupId>
             <artifactId>javax.security-api</artifactId>
@@ -236,7 +214,23 @@
             <artifactId>soteria</artifactId>
             <version>1.0-m01</version>
         </dependency>
+
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.16</version>
+        </dependency>
+        
+        <!-- Apache POI -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.15</version>
+        </dependency>
     </dependencies>
+    
 
     <build>
         <plugins>
@@ -294,21 +288,16 @@
             <url>https://maven.java.net/content/groups/public/</url>
 
         </repository>
-        <repository>
+<!--        <repository>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
             <id>bintray-javaee-security-maven</id>
             <name>bintray</name>
             <url>https://dl.bintray.com/javaee-security-spec/maven</url>
-        </repository>
+        </repository>-->
 
-        <!-- Needed for Yasson -->
-        <repository>
-            <id>yasson-snapshots</id>
-            <name>Yasson Snapshots repository</name>
-            <url>https://repo.eclipse.org/content/repositories/yasson-snapshots</url>
-        </repository>
+        
     </repositories>
 
 </project>

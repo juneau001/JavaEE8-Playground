@@ -6,20 +6,22 @@
 package com.acme.acmepools.bean;
 
 import java.math.BigDecimal;
-import lombok.Data;
-import lombok.NonNull;
+import javax.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter @Setter
 /**
  *
  * @author juneau
  */
 
 public class ColumnBean {
-    @NonNull
+    @NotNull
     private BigDecimal id;
-    @NonNull
+    @NotNull
     private String columnName;
-    @NonNull
+    @NotNull
     private String columnLabel;
     
     public ColumnBean(BigDecimal id,
@@ -29,28 +31,5 @@ public class ColumnBean {
         this.columnName = columnName;
         this.columnLabel = columnLabel;
     }
-    
-    public BigDecimal getId() {
-        return id;
-    }
-
-    public void setId(BigDecimal id) {
-        this.id = id;
-    }
-
-    public String getColumnName() {
-        return columnName;
-    }
-
-    public void setColumnName(String columnName) {
-        this.columnName = columnName;
-    }
-
-    public String getColumnLabel() {
-        return columnLabel;
-    }
-
-    public void setColumnLabel(String columnLabel) {
-        this.columnLabel = columnLabel;
-    }
+        
 }

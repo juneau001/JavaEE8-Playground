@@ -4,21 +4,25 @@ import com.acme.acmepools.entity.Job;
 import com.acme.acmepools.session.JobFacade;
 import com.acme.acmepools.entity.util.JsfUtil;
 import com.acme.acmepools.entity.util.JsfUtil.PersistAction;
+import com.acme.acmepools.event.JobEvent;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletionStage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.event.Event;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 @Named("jobController")
 @SessionScoped
@@ -28,6 +32,9 @@ public class JobController implements Serializable {
     private com.acme.acmepools.session.JobFacade ejbFacade;
     private List<Job> items = null;
     private Job selected;
+
+    @Inject
+    private Event<JobEvent> jobEvent;
 
     public JobController() {
     }
@@ -88,6 +95,16 @@ public class JobController implements Serializable {
             try {
                 if (persistAction != PersistAction.DELETE) {
                     getFacade().edit(selected);
+                    if (persistAction == PersistAction.CREATE) {
+                        jobEvent.fireAsync(new JobEvent("New job added", selected))
+                                .whenComplete((event, throwable) -> {
+                                    if (throwable != null) {
+                                        System.out.println("Error has occurred: " + throwable.getMessage());
+                                    } else {
+                                        System.out.println("Successful Job Processing...");
+                                    }
+                                });
+                    }
                 } else {
                     getFacade().remove(selected);
                 }
@@ -141,7 +158,7 @@ public class JobController implements Serializable {
             return key;
         }
 
-        String getStringKey(java.lang.Integer value) {
+        String getStringKey(BigDecimal value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();

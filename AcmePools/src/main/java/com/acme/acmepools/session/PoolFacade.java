@@ -30,4 +30,15 @@ public class PoolFacade extends AbstractFacade<Pool> {
         super(Pool.class);
     }
     
+    /**
+     * Returns a <code>Pool</code> for a given <code>poolId</code>.
+     * @param pool
+     * @return 
+     */
+    public Pool findByPool(Integer poolId){
+        return (Pool) em.createQuery("select object(o) from Pool o " +
+                "where o.id = :id")
+                .setParameter("id", poolId).getSingleResult();
+    }
+    
 }

@@ -7,6 +7,7 @@ package com.acme.acmepools.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -78,11 +79,16 @@ public class Customer implements Serializable {
     private String email;
     @Column(name = "CREDIT_LIMIT")
     private Integer creditLimit;
+    @JsonbTransient
     @OneToMany(mappedBy = "customerId")
     private Collection<PoolCustomer> poolCustomerCollection;
+    
+    @JsonbTransient
     @JoinColumn(name = "DISCOUNT_CODE", referencedColumnName = "DISCOUNT_CODE")
     @ManyToOne(optional = false)
     private DiscountCode discountCode;
+    
+    @JsonbTransient
     @JoinColumn(name = "ZIP", referencedColumnName = "ZIP_CODE")
     @ManyToOne(optional = false)
     private MicroMarket zip;

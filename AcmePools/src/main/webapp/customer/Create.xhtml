@@ -36,15 +36,17 @@
                         <p:selectOneMenu id="discountCode" value="#{customerController.selected.discountCode}" required="true" requiredMessage="#{bundle.EditCustomerRequiredMessage_discountCode}">
                             <f:selectItems value="#{discountCodeController.itemsAvailableSelectOne}"
                                            var="discountCodeItem"
-                                           itemValue="#{discountCodeItem}"
+                                           itemValue="#{discountCodeItem.discountCode}"
                                            itemLabel="#{discountCodeItem.discountCode}"/>
+                            <f:converter binding="#{discountCodeConverter}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateCustomerLabel_zip}" for="zip" />
                         <p:selectOneMenu id="zip" value="#{customerController.selected.zip}" required="true" requiredMessage="#{bundle.EditCustomerRequiredMessage_zip}">
                             <f:selectItems value="#{microMarketController.itemsAvailableSelectOne}"
                                            var="zipItem"
-                                           itemValue="#{zipItem}"
+                                           itemValue="#{zipItem.zipCode}"
                                            itemLabel="#{zipItem.zipCode}"/>
+                            <f:converter binding="#{zipCodeConverter}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{customerController.create}" value="#{bundle.Save}" update="display,:CustomerListForm:datalist,:growl" oncomplete="handleSubmit(args,'CustomerCreateDialog');"/>

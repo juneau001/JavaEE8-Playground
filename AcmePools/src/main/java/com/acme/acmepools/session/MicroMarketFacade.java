@@ -29,4 +29,15 @@ public class MicroMarketFacade extends AbstractFacade<MicroMarket> {
         super(MicroMarket.class);
     }
     
+    /**
+     * Returns <code>MicroMarket</code> for the specified zipCode.
+     * @param zipCode
+     * @return 
+     */
+    public MicroMarket findByZipCode(String zipCode){
+        return (MicroMarket) em.createQuery("select object(o) from MicroMarket o " +
+                "where o.zipCode = :zipCode")
+                .setParameter("zipCode", zipCode)
+                .getSingleResult();
+    }
 }

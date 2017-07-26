@@ -37,13 +37,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPoolCustomerTitle_customerId}"/>
                             </f:facet>
-                            <h:outputText value="#{item.customerId}"/>
+                            <h:outputText value="#{customerController.findById(item.id).name}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPoolCustomerTitle_poolId}"/>
                             </f:facet>
-                            <h:outputText value="#{item.poolId}"/>
+                            <h:outputText value="#{poolController.findByPool(item.poolId).style}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{poolCustomerController.prepareCreate}" update=":PoolCustomerCreateForm" oncomplete="PF('PoolCustomerCreateDialog').show()"/>

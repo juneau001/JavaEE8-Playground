@@ -40,4 +40,8 @@ public class MicroMarketController {
     public MicroMarket obtainById(MicroMarket microMarket){
         return microMarketFacade.find(microMarket);
     }
+    
+    public MicroMarket obtainByZipCode(String zip){
+        return microMarketFacade.findByZipCode(zip);
+    }
 }

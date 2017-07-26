@@ -40,4 +40,8 @@ public class DiscountCodeController {
         return discountCodeFacade.findByCode(code.getDiscountCode());
     }
     
+    public DiscountCode obtainByCode(String code) {
+        return discountCodeFacade.findByCode(code);
+    }
+    
 }

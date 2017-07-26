@@ -176,5 +176,15 @@ public class PoolController implements Serializable {
         }
 
     }
+    
+    public Pool findByPool(Pool pool){
+        Pool returnPool = null;
+        try {
+            returnPool = ejbFacade.findByPool(pool.getId());
+        } catch (NullPointerException ex){
+            System.out.println(ex);
+        }
+        return returnPool;
+    }
 
 }

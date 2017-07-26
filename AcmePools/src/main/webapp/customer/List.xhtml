@@ -103,13 +103,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCustomerTitle_discountCode}"/>
                             </f:facet>
-                            <h:outputText value="#{discountCodeController.obtainById(item.discountCode)}"/>
+                            <h:outputText value="#{discountCodeController.obtainById(item.discountCode).discountCode}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCustomerTitle_zip}"/>
                             </f:facet>
-                            <h:outputText value="#{item.zip}"/>
+                            <h:outputText value="#{item.zip.zipCode}"/>
                         </p:column>
 
                         <f:facet name="footer">
