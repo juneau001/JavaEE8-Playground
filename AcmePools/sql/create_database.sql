@@ -11,6 +11,7 @@ create table pool_customer(
     pool_id         int,
     customer_id     int);
 
+
 create table job (
     id              int primary key,
     customer_id     int,
@@ -18,7 +19,6 @@ create table job (
     est_hours       float,
     cost            numeric,
     work_date        date);
-
 
 
 create table pool (
@@ -29,6 +29,7 @@ create table pool (
     width           float,
     radius          float,
     gallons         float);
+
 
 -- Add support for data export
 create table column_model(
@@ -135,4 +136,21 @@ insert into pool_customer values(
 insert into pool_customer values(
 2,
 2,
-2)
+2);
+
+-- Uncomment the following to create database sequences if using Apache Derby 10.6+
+-- create sequence pool_cust_s
+-- start with 100;
+-- 
+-- create sequence job_s
+-- start with 100;
+-- 
+-- 
+-- create sequence pool_s
+-- start with 100;
+-- 
+-- create sequence column_model_s
+-- start with 100;
+
+
+

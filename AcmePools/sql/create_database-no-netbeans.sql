@@ -215,3 +215,16 @@ insert into column_model values(
 12,
 'zip',
 'Zip');
+
+-- Uncomment the following to create sequences if using Apache Derby 10.6+
+-- create sequence column_model_s
+-- start with 100;
+-- 
+-- create sequence pool_s
+-- start with 100;
+-- 
+-- create sequence job_s
+-- start with 100;
+-- 
+-- create sequence pool_cust_s
+-- start with 100;
