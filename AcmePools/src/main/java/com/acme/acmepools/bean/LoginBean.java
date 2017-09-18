@@ -21,16 +21,8 @@ package com.acme.acmepools.bean;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
-import javax.security.SecurityContext;
-import javax.security.auth.message.AuthStatus;
-import javax.security.authentication.mechanism.http.annotation.CustomFormAuthenticationMechanismDefinition;
-import javax.security.authentication.mechanism.http.annotation.LoginToContinue;
-import javax.security.identitystore.annotation.LdapIdentityStoreDefinition;
-import javax.security.identitystore.credential.Credential;
-import javax.security.identitystore.credential.Password;
-import javax.security.identitystore.credential.UsernamePasswordCredential;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,8 +30,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import static javax.faces.application.FacesMessage.SEVERITY_ERROR;
-import static javax.security.auth.message.AuthStatus.*;
-import static javax.security.authentication.mechanism.http.AuthenticationParameters.withParams;
+import javax.security.enterprise.credential.Credential;
+import javax.security.enterprise.credential.Password;
+import javax.security.enterprise.credential.UsernamePasswordCredential;
 
 
 //@CustomFormAuthenticationMechanismDefinition(
