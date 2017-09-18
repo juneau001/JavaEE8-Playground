@@ -30,9 +30,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "POOL_CUSTOMER")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "PoolCustomer.findAll", query = "SELECT p FROM PoolCustomer p")
-    , @NamedQuery(name = "PoolCustomer.findById", query = "SELECT p FROM PoolCustomer p WHERE p.id = :id")})
+@NamedQuery(name = "PoolCustomer.findAll", query = "SELECT p FROM PoolCustomer p")
+@NamedQuery(name = "PoolCustomer.findById", query = "SELECT p FROM PoolCustomer p WHERE p.id = :id")
 public class PoolCustomer implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -77,7 +76,6 @@ public class PoolCustomer implements Serializable {
         this.customerId = customerId;
     }
 
-    
     /**
      * @return the poolId
      */
@@ -106,7 +104,6 @@ public class PoolCustomer implements Serializable {
         this.jobCollection = jobCollection;
     }
 
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -131,5 +128,5 @@ public class PoolCustomer implements Serializable {
     public String toString() {
         return "com.acme.acmepools.entity.PoolCustomer[ id=" + id + " ]";
     }
-    
+
 }

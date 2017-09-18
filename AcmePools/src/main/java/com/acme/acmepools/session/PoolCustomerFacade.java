@@ -6,7 +6,9 @@
 
 package com.acme.acmepools.session;
 
+import com.acme.acmepools.entity.Customer;
 import com.acme.acmepools.entity.PoolCustomer;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,4 +31,15 @@ public class PoolCustomerFacade extends AbstractFacade<PoolCustomer> {
         super(PoolCustomer.class);
     }
     
+    /**
+     * Returns a <code>List<PoolCustomer></code> object for a given <code>Customer</code>
+     * @param customer
+     * @return 
+     */
+    public List<PoolCustomer> findByCustomerId(Customer customer){
+        return  em.createQuery("select object(o) from PoolCustomer o " +
+                "where o.customerId = :customerId")
+                .setParameter("customerId", customer)
+                .getResultList();
+    }
 }

@@ -17,23 +17,37 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Named;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
+import javax.json.JsonPointer;
+import javax.json.JsonValue;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import lombok.Getter;
 import lombok.Setter;
+import org.glassfish.json.JsonUtil;
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.CellEditEvent;
 
 @Named("customerController")
 @SessionScoped
 public class CustomerController implements Serializable {
-   
 
     @EJB
     private com.acme.acmepools.session.CustomerFacade ejbFacade;
     private List<Customer> customers = null;
-    @Getter @Setter
+    @Getter
+    @Setter
     private Customer selected;
+
+    @Getter
+    @Setter
+    private String addressSearchText;
+
+    @Getter
+    @Setter
+    private String searchResult;
 
     public CustomerController() {
     }
@@ -154,25 +168,25 @@ public class CustomerController implements Serializable {
                 Customer o = (Customer) object;
                 return getStringKey(o.getCustomerId());
             } else {
-                
+
                 return null;
             }
         }
 
     }
-    
-        public void onCellEdit(CellEditEvent event) {  
-            Object oldValue = event.getOldValue();  
-            Object newValue = event.getNewValue();  
-            if(!oldValue.equals(newValue)){
-                // Save to the database
-                DataTable table = (DataTable) event.getSource();
-                Customer customer = (Customer) table.getRowData();
-                ejbFacade.edit(customer);
-                FacesContext.getCurrentInstance().addMessage(null, 
-                    new FacesMessage(FacesMessage.SEVERITY_INFO,"Successfully Updated", "Updated value to " + newValue));  
-            }
+
+    public void onCellEdit(CellEditEvent event) {
+        Object oldValue = event.getOldValue();
+        Object newValue = event.getNewValue();
+        if (!oldValue.equals(newValue)) {
+            // Save to the database
+            DataTable table = (DataTable) event.getSource();
+            Customer customer = (Customer) table.getRowData();
+            ejbFacade.edit(customer);
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully Updated", "Updated value to " + newValue));
         }
+    }
 
     public String loadCustomer() {
         Map requestMap = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
@@ -180,25 +194,40 @@ public class CustomerController implements Serializable {
         selected = ejbFacade.find(Integer.valueOf(customer));
         return "customerInfo";
     }
-    
+
     /**
      * Utilizes the JSON-B API to create a JSON representation from a collection
      * of data and serializes.
-     * 
-     * @return 
+     *
+     * @return
      */
-    public String fetchJson(){
+    public String fetchJson() {
         System.out.println("Items: " + customers);
         Jsonb jsonb = JsonbBuilder.create();
         String result = null;
-        
+
         result = jsonb.toJson(customers);
-       
-       
+
         return result;
     }
-    
-    public Customer findById(Integer customerId){
+
+    public void findCustomerByAddress() {
+        searchResult = null;
+        String text = "/" + this.addressSearchText;
+        JsonValue object = JsonUtil.toJson(fetchJson());
+        if (addressSearchText != null) {
+            JsonPointer pointer = Json.createPointer(text);
+            JsonValue result = pointer.getValue(object.asJsonArray());
+
+            // Replace a value
+            JsonArray array = (JsonArray) pointer.replace(object.asJsonArray(), Json.createValue("1000 JsonP Drive"));
+            searchResult = array.toString();
+            //searchResult = result.toString();
+        }
+
+    }
+
+    public Customer findById(Integer customerId) {
         return ejbFacade.findByCustomerId(customerId);
     }
 }

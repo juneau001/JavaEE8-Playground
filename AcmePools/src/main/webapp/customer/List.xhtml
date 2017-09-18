@@ -17,6 +17,22 @@
             <h:form id="CustomerListForm">
                 <p:messages showDetail="true" autoUpdate="true" closable="true"/>
                 <br/>
+                <p:dialog id="jobsByCustomerDialog" widgetVar="jobsByCustomerDialog" appendTo="=@(body)"
+                          closable="true">
+                    <p:scrollPanel>
+                        <p:dataTable id="jobsByCustomer" value="#{jobController.jobsByCustomer}" var="job">
+                            <p:column headerText="Work Date">
+                                <h:outputText value="#{job.workDate}"/>
+                            </p:column>
+                            <p:column headerText="Description">
+                                <h:outputText value="#{job.description}"/>
+                            </p:column>
+                            <p:column headerText="Est Hours">
+                                <h:outputText value="#{job.estHours}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:scrollPanel>
+                </p:dialog>
                 <p:panel header="#{bundle.ListCustomerTitle}">
                     <p:dataTable id="datalist" value="#{customerController.items}" var="item"
                                  selectionMode="single" selection="#{customerController.selected}"
@@ -30,7 +46,7 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="cellEdit" listener="#{customerController.onCellEdit}" />  
- 
+
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCustomerTitle_customerId}"/>
@@ -110,6 +126,14 @@
                                 <h:outputText value="#{bundle.ListCustomerTitle_zip}"/>
                             </f:facet>
                             <h:outputText value="#{item.zip.zipCode}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Manage"/>
+                            </f:facet>
+                            <p:commandButton value="Jobs" actionListener="#{jobController.findByCustomer(item)}"
+                                             update=":CustomerListForm:jobsByCustomer"
+                                             oncomplete="PF('jobsByCustomerDialog').show();"/>
                         </p:column>
 
                         <f:facet name="footer">

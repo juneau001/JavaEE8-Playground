@@ -18,7 +18,8 @@ import javax.persistence.Converter;
  *
  * @author Juneau
  */
-@Converter(autoApply = true)
+// Uncomment if using JPA 2.1-
+//@Converter(autoApply = true)
 public class LocalDatePersistenceConverter implements AttributeConverter<LocalDate, Date> {
     @Override
     public Date convertToDatabaseColumn(LocalDate entityValue) {

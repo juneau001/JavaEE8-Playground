@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.acme.acmepools.entity;
 
 import java.io.Serializable;
@@ -28,15 +27,15 @@ import lombok.Data;
  *
  * @author Juneau
  */
-@Data
 @Entity
 @Table(name = "DISCOUNT_CODE")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "DiscountCode.findAll", query = "SELECT d FROM DiscountCode d"),
-    @NamedQuery(name = "DiscountCode.findByDiscountCode", query = "SELECT d FROM DiscountCode d WHERE d.discountCode = :discountCode"),
-    @NamedQuery(name = "DiscountCode.findByRate", query = "SELECT d FROM DiscountCode d WHERE d.rate = :rate")})
+
+@NamedQuery(name = "DiscountCode.findAll", query = "SELECT d FROM DiscountCode d")
+@NamedQuery(name = "DiscountCode.findByDiscountCode", query = "SELECT d FROM DiscountCode d WHERE d.discountCode = :discountCode")
+@NamedQuery(name = "DiscountCode.findByRate", query = "SELECT d FROM DiscountCode d WHERE d.rate = :rate")
 public class DiscountCode implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -57,8 +56,61 @@ public class DiscountCode implements Serializable {
         this.discountCode = discountCode;
     }
 
+    /**
+     * @return the discountCode
+     */
+    public String getDiscountCode() {
+        return discountCode;
+    }
+
+    /**
+     * @param discountCode the discountCode to set
+     */
+    public void setDiscountCode(String discountCode) {
+        this.discountCode = discountCode;
+    }
+
+    /**
+     * @return the rate
+     */
+    public BigDecimal getRate() {
+        return rate;
+    }
+
+    /**
+     * @param rate the rate to set
+     */
+    public void setRate(BigDecimal rate) {
+        this.rate = rate;
+    }
+
     @XmlTransient
     public Collection<Customer> getCustomerCollection() {
         return customerCollection;
-    }  
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (discountCode != null ? discountCode.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof DiscountCode)) {
+            return false;
+        }
+        DiscountCode other = (DiscountCode) object;
+        if ((this.discountCode == null && other.discountCode != null) || (this.discountCode != null && !this.discountCode.equals(other.discountCode))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.acme.acmepools.entity.DiscountCode[ discountCode=" + discountCode + " ]";
+    }
 }

@@ -1,6 +1,8 @@
 package com.acme.acmepools.jsf;
 
+import com.acme.acmepools.entity.Customer;
 import com.acme.acmepools.entity.Job;
+import com.acme.acmepools.entity.PoolCustomer;
 import com.acme.acmepools.session.JobFacade;
 import com.acme.acmepools.entity.util.JsfUtil;
 import com.acme.acmepools.entity.util.JsfUtil.PersistAction;
@@ -8,9 +10,9 @@ import com.acme.acmepools.event.JobEvent;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.CompletionStage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -30,7 +32,12 @@ public class JobController implements Serializable {
 
     @EJB
     private com.acme.acmepools.session.JobFacade ejbFacade;
+    @EJB
+    private com.acme.acmepools.session.PoolCustomerFacade poolCustomerFacade;
+    
     private List<Job> items = null;
+    private List<Job> jobsByCustomer = null;
+    private List<Job> jobsByPool = null;
     private Job selected;
 
     @Inject
@@ -41,6 +48,20 @@ public class JobController implements Serializable {
 
     public Job getSelected() {
         return selected;
+    }
+    
+    public void populateRoundJobs(){
+        this.jobsByPool = ejbFacade.findByCustPoolShape("ROUND");
+        System.out.println("There are " + jobsByPool.size() + " round pool jobs");
+    }
+    
+    public void findByCustomer(Customer customer){
+        List<PoolCustomer> poolCustomerObjects = poolCustomerFacade.findByCustomerId(customer);
+        jobsByCustomer = new ArrayList();
+        for(PoolCustomer pCust:poolCustomerObjects){
+            List<Job> customerJobs = ejbFacade.findByCustomer(pCust);
+            jobsByCustomer.addAll(customerJobs);
+        }
     }
 
     public void setSelected(Job selected) {
@@ -87,6 +108,25 @@ public class JobController implements Serializable {
             items = getFacade().findAll();
         }
         return items;
+    }
+    
+    public List<Job> getJobsByCustomer(){
+        return jobsByCustomer;
+    }
+    
+    public void setJobsByCustomer(List<Job> jobs){
+        this.jobsByCustomer = jobs;
+    }
+    
+    public List<Job> getJobsByPool(){
+        if(this.jobsByPool == null){
+            populateRoundJobs();
+        }
+        return jobsByPool;
+    }
+    
+    public void setJobsByPool(List<Job> jobs){
+        this.jobsByPool = jobs;
     }
 
     private void persist(PersistAction persistAction, String successMessage) {

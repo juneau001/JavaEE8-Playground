@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.acme.acmepools.entity;
 
 import java.io.Serializable;
@@ -27,17 +26,16 @@ import lombok.Data;
  *
  * @author Juneau
  */
-@Data
 @Entity
 @Table(name = "MICRO_MARKET")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "MicroMarket.findAll", query = "SELECT m FROM MicroMarket m"),
-    @NamedQuery(name = "MicroMarket.findByZipCode", query = "SELECT m FROM MicroMarket m WHERE m.zipCode = :zipCode"),
-    @NamedQuery(name = "MicroMarket.findByRadius", query = "SELECT m FROM MicroMarket m WHERE m.radius = :radius"),
-    @NamedQuery(name = "MicroMarket.findByAreaLength", query = "SELECT m FROM MicroMarket m WHERE m.areaLength = :areaLength"),
-    @NamedQuery(name = "MicroMarket.findByAreaWidth", query = "SELECT m FROM MicroMarket m WHERE m.areaWidth = :areaWidth")})
+@NamedQuery(name = "MicroMarket.findAll", query = "SELECT m FROM MicroMarket m")
+@NamedQuery(name = "MicroMarket.findByZipCode", query = "SELECT m FROM MicroMarket m WHERE m.zipCode = :zipCode")
+@NamedQuery(name = "MicroMarket.findByRadius", query = "SELECT m FROM MicroMarket m WHERE m.radius = :radius")
+@NamedQuery(name = "MicroMarket.findByAreaLength", query = "SELECT m FROM MicroMarket m WHERE m.areaLength = :areaLength")
+@NamedQuery(name = "MicroMarket.findByAreaWidth", query = "SELECT m FROM MicroMarket m WHERE m.areaWidth = :areaWidth")
 public class MicroMarket implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -62,9 +60,97 @@ public class MicroMarket implements Serializable {
         this.zipCode = zipCode;
     }
 
+    /**
+     * @return the zipCode
+     */
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    /**
+     * @param zipCode the zipCode to set
+     */
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    /**
+     * @return the radius
+     */
+    public Double getRadius() {
+        return radius;
+    }
+
+    /**
+     * @param radius the radius to set
+     */
+    public void setRadius(Double radius) {
+        this.radius = radius;
+    }
+
+    /**
+     * @return the areaLength
+     */
+    public Double getAreaLength() {
+        return areaLength;
+    }
+
+    /**
+     * @param areaLength the areaLength to set
+     */
+    public void setAreaLength(Double areaLength) {
+        this.areaLength = areaLength;
+    }
+
+    /**
+     * @return the areaWidth
+     */
+    public Double getAreaWidth() {
+        return areaWidth;
+    }
+
+    /**
+     * @param areaWidth the areaWidth to set
+     */
+    public void setAreaWidth(Double areaWidth) {
+        this.areaWidth = areaWidth;
+    }
+
+    /**
+     * @param customerCollection the customerCollection to set
+     */
+    public void setCustomerCollection(Collection<Customer> customerCollection) {
+        this.customerCollection = customerCollection;
+    }
+
     @XmlTransient
     public Collection<Customer> getCustomerCollection() {
         return customerCollection;
     }
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (zipCode != null ? zipCode.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof MicroMarket)) {
+            return false;
+        }
+        MicroMarket other = (MicroMarket) object;
+        if ((this.zipCode == null && other.zipCode != null) || (this.zipCode != null && !this.zipCode.equals(other.zipCode))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.acme.acmepools.entity.MicroMarket[ zipCode=" + zipCode + " ]";
+    }
+
 }

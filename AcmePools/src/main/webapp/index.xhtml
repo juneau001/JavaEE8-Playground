@@ -41,11 +41,29 @@
                             <h:outputText value="#{item.email}"/>
                         </p:column>
                         
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Address Line 1"/>
+                            </f:facet>
+                            <h:outputText value="#{item.addressline1}"/>
+                        </p:column>
                       
                     </p:dataTable>
                 </p:panel>
                 <h:link value="See JSON" outcome="customersJson">
                 </h:link>
+                
+                <br/>
+                <p:panel header="Customer Search By Addresss">
+                    <p:outputLabel for="addressSearchText" value="Pointer String:"/>
+                    <p:inputText id="addressSearchText" value="#{customerController.addressSearchText}"/>
+                    <br/><br/>
+                    <p:commandButton id="searchButton" action="#{customerController.findCustomerByAddress}"
+                                     update="searchResult" value="Find Value"/>
+                </p:panel>
+                <br/>
+                <h:outputText id="searchResult" value="#{customerController.searchResult}"/>
+                
             </h:form>
         </ui:define>
     </ui:composition>

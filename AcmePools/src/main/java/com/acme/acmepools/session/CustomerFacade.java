@@ -35,8 +35,7 @@ public class CustomerFacade extends AbstractFacade<Customer> {
      * @return 
      */
     public Customer findByCustomerId(Integer customerId){
-        return (Customer) em.createQuery("select object(o) from Customer o " +
-                "where o.customerId = :customerId")
+        return (Customer) em.createNamedQuery("Customer.findByCustomerId")
                 .setParameter("customerId", customerId)
                 .getSingleResult();
     }
