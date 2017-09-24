@@ -22,6 +22,7 @@ public class ZipCodeConverter implements Converter
     @Inject
     MicroMarketController microMarketController;
 
+    @Override
     public MicroMarket getAsObject(FacesContext context, UIComponent component, String value)
     {
         System.out.println(value);
@@ -35,6 +36,7 @@ public class ZipCodeConverter implements Converter
         return mm;
     }
 
+    @Override
     public String getAsString(FacesContext context, UIComponent component, Object value)
     {
         return value.toString();

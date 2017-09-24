@@ -26,7 +26,6 @@ import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import lombok.Getter;
 import lombok.Setter;
-import org.glassfish.json.JsonUtil;
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.CellEditEvent;
 
@@ -214,7 +213,8 @@ public class CustomerController implements Serializable {
     public void findCustomerByAddress() {
         searchResult = null;
         String text = "/" + this.addressSearchText;
-        JsonValue object = JsonUtil.toJson(fetchJson());
+        JsonObject json = Json.createObjectBuilder().build();
+        JsonValue object = json.getJsonObject(fetchJson());
         if (addressSearchText != null) {
             JsonPointer pointer = Json.createPointer(text);
             JsonValue result = pointer.getValue(object.asJsonArray());

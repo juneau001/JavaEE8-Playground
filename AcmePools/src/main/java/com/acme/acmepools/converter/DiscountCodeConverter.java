@@ -21,6 +21,7 @@ public class DiscountCodeConverter implements Converter
     @Inject
     DiscountCodeController discountCodeController;
 
+    @Override
     public DiscountCode getAsObject(FacesContext context, UIComponent component, String value)
     {
         System.out.println(value);
@@ -34,6 +35,7 @@ public class DiscountCodeConverter implements Converter
         return dc;
     }
 
+    @Override
     public String getAsString(FacesContext context, UIComponent component, Object value)
     {
         return value.toString();

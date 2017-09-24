@@ -45,7 +45,6 @@ public class Job implements Serializable {
 //    generator="job_s_generator")
 //    @SequenceGenerator(name="job_s_generator",sequenceName="job_s", allocationSize=1)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID")
     private BigDecimal id;
     @Lob

@@ -16,11 +16,8 @@ import javax.validation.constraints.NotNull;
 
 public class ColumnBean {
 
-    @NotNull
     private BigDecimal id;
-    @NotNull
     private String columnName;
-    @NotNull
     private String columnLabel;
     
     public ColumnBean(BigDecimal id,

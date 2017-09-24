@@ -38,7 +38,6 @@ public class ColumnModel implements Serializable {
 //    generator="column_model_s_generator")
 //    @SequenceGenerator(name="column_model_s_generator",sequenceName="column_model_s", allocationSize=1)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID")
     private BigDecimal id;
     @Size(max = 30)

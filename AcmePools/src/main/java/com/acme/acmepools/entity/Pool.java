@@ -44,7 +44,6 @@ public class Pool implements Serializable {
 //    generator="pool_s_generator")
 //    @SequenceGenerator(name="pool_s_generator",sequenceName="pool_s", allocationSize=1)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID")
     private Integer id;
     @Size(max = 10)

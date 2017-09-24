@@ -7,6 +7,7 @@ package com.acme.acmepools.utility;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -16,6 +17,7 @@ import sun.misc.BASE64Encoder;
  * @author Juneau
  */
 @Named
+@RequestScoped
 public class CreditLimitEncryptor {
     public static final String DEFAULT_ENCODING = "UTF-8"; 
     static BASE64Encoder enc = new BASE64Encoder();

@@ -41,7 +41,6 @@ public class PoolCustomer implements Serializable {
 //    generator="pool_cust_s_generator")
 //    @SequenceGenerator(name="pool_cust_s_generator",sequenceName="pool_cust_s", allocationSize=1)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID")
     private Integer id;
     @JoinColumn(name = "CUSTOMER_ID", referencedColumnName = "CUSTOMER_ID")
